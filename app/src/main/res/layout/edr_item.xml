@@ -33,7 +33,7 @@
         android:text="dsjkghkakjgklakg" />
 
     <CheckBox
-        android:id="@+id/gold_star_checkbox"
+        android:id="@+id/checkbox_gold_star"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:button="@drawable/checkstar_selector"/>

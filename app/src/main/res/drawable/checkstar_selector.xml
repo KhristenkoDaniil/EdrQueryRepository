@@ -2,11 +2,11 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        app:srcCompat="@drawable/ic_tilda_icons_2web_star_gold"
+        android:drawable="@drawable/star_icon_gray"
         android:state_checked="false"/>
 
     <item
-        app:srcCompat="@drawable/ic_tilda_icons_2web_star_checked"
+        android:drawable="@drawable/star_icon"
         android:state_checked="true"/>
 
 </selector>
