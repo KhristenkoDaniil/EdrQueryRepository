@@ -42,7 +42,7 @@
         android:id="@+id/book_view_declaration"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/iBooks_S3_icon" />
+        app:srcCompat="@drawable/books_icon" />
 
 
 </LinearLayout>
