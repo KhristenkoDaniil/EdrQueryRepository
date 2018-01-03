@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
         private TextView firstName;
         private TextView workPlace;
         private CheckBox checkBoxGoldStar;
+        private ImageView bookViewDeclaration;
 
 
         public EdrHolder(View itemView) {
@@ -65,6 +67,7 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
             firstName = (TextView) itemView.findViewById(R.id.first_name);
             workPlace = (TextView) itemView.findViewById(R.id.work_place);
             checkBoxGoldStar = itemView.findViewById(R.id.checkbox_gold_star);
+            bookViewDeclaration = itemView.findViewById(R.id.book_view_declaration);
         }
     }
 }

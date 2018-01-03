@@ -38,11 +38,11 @@
         android:layout_height="match_parent"
         android:button="@drawable/checkstar_selector"/>
 
-    <!--<ImageView-->
-        <!--android:id="@+id/book_view_declaration"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--app:srcCompat="@drawable/ic_tilda_icons_2web_phonebook_blue"/>-->
+    <ImageView
+        android:id="@+id/book_view_declaration"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/iBooks_S3_icon" />
 
 
 </LinearLayout>
