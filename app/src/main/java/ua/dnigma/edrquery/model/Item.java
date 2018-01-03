@@ -9,6 +9,7 @@ public class Item {
     @SerializedName("id")
     @Expose
     private String id;
+    private Boolean isInteresting;
     @SerializedName("firstname")
     @Expose
     private String firstname;
