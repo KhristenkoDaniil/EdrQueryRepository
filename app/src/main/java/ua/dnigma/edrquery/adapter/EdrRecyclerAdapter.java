@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.dnigma.edrquery.R;
+import ua.dnigma.edrquery.data.DBHelper;
+import ua.dnigma.edrquery.data.EdrInterestTableUpdate;
 import ua.dnigma.edrquery.model.Item;
 
 /**
@@ -23,10 +26,12 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
 
     private LayoutInflater inflater;
     private List<Item> edrItems = new ArrayList<>();
+    DBHelper dbHelper;
 
-    public EdrRecyclerAdapter(Context context, List<Item> items) {
+    public EdrRecyclerAdapter(Context context, List<Item> items, DBHelper dbHelper) {
         this.inflater = LayoutInflater.from(context);
         this.edrItems = items;
+        this.dbHelper = dbHelper;
 
     }
 
@@ -38,15 +43,31 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
     }
 
     @Override
-    public void onBindViewHolder(EdrHolder holder, int position) {
-        Item edrItem = edrItems.get(position);
+    public void onBindViewHolder(final EdrHolder holder, int position) {
+        final Item edrItem = edrItems.get(position);
 
         holder.lastName.setText(edrItem.getLastname());
         holder.firstName.setText(edrItem.getFirstname());
         holder.workPlace.setText(edrItem.getPlaceOfWork());
         holder.position.setText(edrItem.getPosition());
 
-//        holder.bookViewDeclaration.setOnClickListener();
+        holder.checkBoxGoldStar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (holder.checkBoxGoldStar.isChecked()) {
+                    new EdrInterestTableUpdate(dbHelper).addInterestingEDRItemToDB(edrItem);
+                } else {
+                    new EdrInterestTableUpdate(dbHelper).deleteNotInterestingEDRItemFromDB(edrItem.getId());
+                }
+            }
+        });
+
+        holder.bookViewDeclaration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
     }
 
