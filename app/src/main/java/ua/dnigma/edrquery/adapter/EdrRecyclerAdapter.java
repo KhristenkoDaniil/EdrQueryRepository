@@ -44,6 +44,9 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
         holder.lastName.setText(edrItem.getLastname());
         holder.firstName.setText(edrItem.getFirstname());
         holder.workPlace.setText(edrItem.getPlaceOfWork());
+        holder.position.setText(edrItem.getPosition());
+
+//        holder.bookViewDeclaration.setOnClickListener();
 
     }
 
@@ -57,6 +60,7 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
         private TextView lastName;
         private TextView firstName;
         private TextView workPlace;
+        private TextView position;
         private CheckBox checkBoxGoldStar;
         private ImageView bookViewDeclaration;
 
@@ -66,6 +70,7 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
             lastName = (TextView) itemView.findViewById(R.id.last_name);
             firstName = (TextView) itemView.findViewById(R.id.first_name);
             workPlace = (TextView) itemView.findViewById(R.id.work_place);
+            position = itemView.findViewById(R.id.position);
             checkBoxGoldStar = itemView.findViewById(R.id.checkbox_gold_star);
             bookViewDeclaration = itemView.findViewById(R.id.book_view_declaration);
         }

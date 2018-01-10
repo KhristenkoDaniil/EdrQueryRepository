@@ -13,14 +13,16 @@ public class EdrInterestSchema {
     public static final String PLACE_OF_WORK = "placeOfWork";
     public static final String POSITION = "position";
     public static final String LINK_PDF = "LinkPDF";
+    public static final String COMEMNTS = "comments";
 
     public static final String CREATE_TABLE_COMPANY = "CREATE TABLE IF NOT EXISTS "
             + TABLE_NAME + " ("
-            + ID + " TEXT, "
+            + ID + " TEXT PRIMARY KEY, "
             + FIRST_NAME + " TEXT, "
             + LAST_NAME + " TEXT, "
             + PLACE_OF_WORK + " TEXT, "
             + POSITION + " TEXT, "
-            + LINK_PDF + " TEXT);";
+            + LINK_PDF + " TEXT);"
+            + COMEMNTS + " TEXT(150));";
 
 }
