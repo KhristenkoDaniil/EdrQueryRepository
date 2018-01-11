@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import ua.dnigma.edrquery.R;
 import ua.dnigma.edrquery.adapter.EdrRecyclerAdapter;
 import ua.dnigma.edrquery.callback.OnEdrQueryCallback;
+import ua.dnigma.edrquery.data.DBHelper;
 import ua.dnigma.edrquery.manager.EdrQueryManager;
 import ua.dnigma.edrquery.model.EdrQuery;
 
@@ -23,6 +24,7 @@ public class EdrQueryFragment extends Fragment implements OnEdrQueryCallback{
 
     private RecyclerView recyclerView;
     private EdrRecyclerAdapter edrRecyclerAdapter;
+    DBHelper dbHelper = new DBHelper(getContext());
 
 
     @Nullable
@@ -31,7 +33,6 @@ public class EdrQueryFragment extends Fragment implements OnEdrQueryCallback{
         View view = inflater.inflate(R.layout.list_fragment_layout, container,false);
 
         recyclerView = (RecyclerView)view.findViewById(R.id.edr_recyclerView);
-
 
         return view;
     }
@@ -46,7 +47,7 @@ public class EdrQueryFragment extends Fragment implements OnEdrQueryCallback{
     @Override
     public void onSucsses(EdrQuery edrQueries) {
 
-        edrRecyclerAdapter = new EdrRecyclerAdapter(getContext(), edrQueries.getItems());
+        edrRecyclerAdapter = new EdrRecyclerAdapter(getContext(), edrQueries.getItems(), dbHelper);
         recyclerView.setAdapter(edrRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

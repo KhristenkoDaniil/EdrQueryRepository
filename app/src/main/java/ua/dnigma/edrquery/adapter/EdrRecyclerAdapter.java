@@ -15,7 +15,8 @@ import java.util.List;
 
 import ua.dnigma.edrquery.R;
 import ua.dnigma.edrquery.data.DBHelper;
-import ua.dnigma.edrquery.data.EdrInterestTableUpdate;
+import ua.dnigma.edrquery.data.EdrFavoriteTableDao;
+import ua.dnigma.edrquery.data.IdItemCheck;
 import ua.dnigma.edrquery.model.Item;
 
 /**
@@ -27,6 +28,8 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
     private LayoutInflater inflater;
     private List<Item> edrItems = new ArrayList<>();
     DBHelper dbHelper;
+
+
 
     public EdrRecyclerAdapter(Context context, List<Item> items, DBHelper dbHelper) {
         this.inflater = LayoutInflater.from(context);
@@ -55,9 +58,9 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (holder.checkBoxGoldStar.isChecked()) {
-                    new EdrInterestTableUpdate(dbHelper).addInterestingEDRItemToDB(edrItem);
+                    new EdrFavoriteTableDao(dbHelper).addInterestingEDRItemToDB(edrItem);
                 } else {
-                    new EdrInterestTableUpdate(dbHelper).deleteNotInterestingEDRItemFromDB(edrItem.getId());
+                    new EdrFavoriteTableDao(dbHelper).deleteNotInterestingEDRItemFromDB(edrItem.getId());
                 }
             }
         });
@@ -69,6 +72,10 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
             }
         });
 
+        boolean idItemCheck = new IdItemCheck(dbHelper).idItemCheckInDb(edrItem.getId());
+        if (idItemCheck) {
+            holder.checkBoxGoldStar.isChecked();
+        }
     }
 
     @Override

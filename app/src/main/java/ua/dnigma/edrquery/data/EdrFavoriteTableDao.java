@@ -10,11 +10,11 @@ import ua.dnigma.edrquery.model.Item;
  * Created by Даниил on 04.01.2018.
  */
 
-public class EdrInterestTableUpdate {
+public class EdrFavoriteTableDao {
 
     private DBHelper dbHelper;
 
-    public EdrInterestTableUpdate(DBHelper dbHelper){
+    public EdrFavoriteTableDao(DBHelper dbHelper){
         this.dbHelper = dbHelper;
     }
 
