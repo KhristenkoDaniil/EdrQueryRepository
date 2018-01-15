@@ -14,33 +14,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.dnigma.edrquery.R;
-import ua.dnigma.edrquery.data.DBHelper;
-import ua.dnigma.edrquery.data.EdrFavoriteTableDao;
-import ua.dnigma.edrquery.data.IdItemCheck;
+import ua.dnigma.edrquery.callback.OnCheckboxCallback;
 import ua.dnigma.edrquery.model.Item;
 
 /**
  * Created by Даниил on 26.11.2017.
  */
 
-public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.EdrHolder>{
+public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.EdrHolder> {
 
     private LayoutInflater inflater;
     private List<Item> edrItems = new ArrayList<>();
-    DBHelper dbHelper;
+    OnCheckboxCallback onCheckboxCallback;
 
 
-
-    public EdrRecyclerAdapter(Context context, List<Item> items, DBHelper dbHelper) {
+    public EdrRecyclerAdapter(Context context, List<Item> items, OnCheckboxCallback onCheckboxCallback) {
         this.inflater = LayoutInflater.from(context);
         this.edrItems = items;
-        this.dbHelper = dbHelper;
-
+        this.onCheckboxCallback = onCheckboxCallback;
     }
 
     @Override
     public EdrHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.from(parent.getContext()).inflate(R.layout.edr_item, parent,false);
+        View view = inflater.from(parent.getContext()).inflate(R.layout.edr_item, parent, false);
         EdrHolder edrHolder = new EdrHolder(view);
         return edrHolder;
     }
@@ -56,26 +52,25 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
 
         holder.checkBoxGoldStar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (holder.checkBoxGoldStar.isChecked()) {
-                    new EdrFavoriteTableDao(dbHelper).addInterestingEDRItemToDB(edrItem);
-                } else {
-                    new EdrFavoriteTableDao(dbHelper).deleteNotInterestingEDRItemFromDB(edrItem.getId());
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    onCheckboxCallback.onChecked(edrItem);
+                }else {
+                    onCheckboxCallback.unChecked(edrItem.getId());
                 }
+
             }
         });
 
         holder.bookViewDeclaration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int d;
 
             }
         });
 
-        boolean idItemCheck = new IdItemCheck(dbHelper).idItemCheckInDb(edrItem.getId());
-        if (idItemCheck) {
-            holder.checkBoxGoldStar.isChecked();
-        }
+
     }
 
     @Override
@@ -83,7 +78,7 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
         return edrItems.size();
     }
 
-    public class EdrHolder extends RecyclerView.ViewHolder{
+    public class EdrHolder extends RecyclerView.ViewHolder {
 
         private TextView lastName;
         private TextView firstName;

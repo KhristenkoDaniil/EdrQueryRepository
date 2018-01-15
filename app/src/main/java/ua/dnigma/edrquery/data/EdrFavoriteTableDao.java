@@ -34,26 +34,29 @@ public class EdrFavoriteTableDao {
                 contentValues);
 
         sqLiteDatabase.endTransaction();
-//        sqLiteDatabase.setTransactionSuccessful();
-
-        sqLiteDatabase.close();
-    }
-
-    public void deleteNotInterestingEDRItemFromDB(String id) {
-        SQLiteDatabase sqLiteDatabase = dbHelper.getSqLiteDatabase();
-//TODO add transaction
-        sqLiteDatabase.delete(EdrInterestSchema.TABLE_NAME, EdrInterestSchema.ID + id,
-                null);
 
         sqLiteDatabase.close();
     }
 
 //    public void deleteNotInterestingEDRItemFromDB(String id) {
 //        SQLiteDatabase sqLiteDatabase = dbHelper.getSqLiteDatabase();
+////TODO add transaction
+//        sqLiteDatabase.delete(EdrInterestSchema.TABLE_NAME, EdrInterestSchema.ID + id,
+//                null);
 //
-//        sqLiteDatabase.delete(EdrInterestSchema.TABLE_NAME, EdrInterestSchema.ID + "=?",
-//                new String[] {id});
+//        sqLiteDatabase.close();
 //    }
+
+    public void deleteNotInterestingEDRItemFromDB(String id) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getSqLiteDatabase();
+
+        sqLiteDatabase.delete(EdrInterestSchema.TABLE_NAME, EdrInterestSchema.ID + "=?",
+                new String[] {id});
+
+        sqLiteDatabase.close();
+    }
+
+    public void isContainsId()
 
 
 

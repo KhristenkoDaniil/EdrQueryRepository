@@ -15,18 +15,14 @@ public class IdItemCheck {
     }
 
     public boolean  idItemCheckInDb(String id) {
-        boolean idItemInDb = false;
+
 
         SQLiteDatabase sqLiteDatabase = dbHelper.getSqLiteDatabase();
 
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + EdrInterestSchema.TABLE_NAME +
                 " WHERE " + EdrInterestSchema.ID + " = " + id, null);
-        cursor.moveToFirst();
-        while (cursor.moveToNext()) {
-            if (id == cursor.getString(0).toString()) {
-                idItemInDb = true;
-            }
-        }
-        return idItemInDb;
+        return cursor.getCount()>0;
+
+
     }
 }

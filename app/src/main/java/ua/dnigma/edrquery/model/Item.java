@@ -74,4 +74,12 @@ public class Item {
         this.linkPDF = linkPDF;
     }
 
+    public Boolean getInteresting() {
+        return isInteresting;
+    }
+
+    public void setInteresting(Boolean interesting) {
+        isInteresting = interesting;
+    }
+
 }
