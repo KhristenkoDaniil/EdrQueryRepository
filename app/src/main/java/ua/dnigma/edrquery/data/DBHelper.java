@@ -14,7 +14,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "edrInterestDB";
     public static final int DB_VERSION = 1;
 
-    public DBHelper(Context context/*, String name, SQLiteDatabase.CursorFactory factory, int version*/) {
+    public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 

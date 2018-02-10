@@ -15,6 +15,7 @@ import java.util.List;
 
 import ua.dnigma.edrquery.R;
 import ua.dnigma.edrquery.callback.OnCheckboxCallback;
+import ua.dnigma.edrquery.data.DataBaseManager;
 import ua.dnigma.edrquery.model.Item;
 
 /**
@@ -61,6 +62,12 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
 
             }
         });
+
+       if (edrItem.getFavorite()) {
+           holder.checkBoxGoldStar.setChecked(true);
+       }else {
+           holder.checkBoxGoldStar.setChecked(false);
+       }
 
         holder.bookViewDeclaration.setOnClickListener(new View.OnClickListener() {
             @Override

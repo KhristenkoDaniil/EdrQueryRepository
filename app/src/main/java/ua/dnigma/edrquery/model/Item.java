@@ -9,7 +9,7 @@ public class Item {
     @SerializedName("id")
     @Expose
     private String id;
-    private Boolean isInteresting;
+    private Boolean isFavorite;
     @SerializedName("firstname")
     @Expose
     private String firstname;
@@ -74,12 +74,11 @@ public class Item {
         this.linkPDF = linkPDF;
     }
 
-    public Boolean getInteresting() {
-        return isInteresting;
+    public Boolean getFavorite() {
+        return isFavorite;
     }
 
-    public void setInteresting(Boolean interesting) {
-        isInteresting = interesting;
+    public void setFavorite(Boolean favorite) {
+        isFavorite = favorite;
     }
-
 }
