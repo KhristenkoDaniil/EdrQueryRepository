@@ -9,7 +9,7 @@ public class Item {
     @SerializedName("id")
     @Expose
     private String id;
-    private Boolean isFavorite;
+    private boolean isFavorite;
     @SerializedName("firstname")
     @Expose
     private String firstname;
@@ -25,6 +25,7 @@ public class Item {
     @SerializedName("linkPDF")
     @Expose
     private String linkPDF;
+    private String coments;
 
     public String getId() {
         return id;
@@ -74,11 +75,19 @@ public class Item {
         this.linkPDF = linkPDF;
     }
 
-    public Boolean getFavorite() {
+    public boolean getFavorite() {
         return isFavorite;
     }
 
-    public void setFavorite(Boolean favorite) {
+    public void setFavorite(boolean favorite) {
         isFavorite = favorite;
+    }
+
+    public String getComents() {
+        return coments;
+    }
+
+    public void setComents(String coments) {
+        this.coments = coments;
     }
 }
