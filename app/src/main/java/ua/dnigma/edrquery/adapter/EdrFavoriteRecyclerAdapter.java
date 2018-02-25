@@ -68,11 +68,9 @@ public class EdrFavoriteRecyclerAdapter extends RecyclerView.Adapter<EdrFavorite
             }
         });
 
-        if (edrItem.getFavorite()) {
+
             holder.checkBoxGoldStar.setChecked(true);
-        } else {
-            holder.checkBoxGoldStar.setChecked(false);
-        }
+
 
         holder.bookViewDeclaration.setOnClickListener(new View.OnClickListener() {
             @Override

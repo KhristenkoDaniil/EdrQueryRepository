@@ -69,6 +69,8 @@ public class EdrFavoriteFragment extends Fragment implements OnCheckboxCallback,
 
     @Override
     public void unChecked(String id) {
+        DataBaseManager.getInstance(getContext()).getEdrFavoriteTableDao()
+                .deleteNotInterestingEDRItemFromDB(id);
 
     }
 
