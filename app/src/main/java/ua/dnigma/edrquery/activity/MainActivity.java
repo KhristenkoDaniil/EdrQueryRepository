@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebView;
 import android.widget.CheckBox;
 import android.widget.SearchView;
 
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private WebView webViewDeclaration;
 
 
     @Override
@@ -38,9 +41,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        webViewDeclaration = findViewById(R.id.webview_declaration);
+        webViewDeclaration.getSettings().setJavaScriptEnabled(true);
+        webViewDeclaration.setVisibility(View.INVISIBLE);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -106,6 +113,11 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(new EdrQueryFragment(), "Декларации");
         viewPagerAdapter.addFragment(new EdrFavoriteFragment(), "Избранное");
         viewPager.setAdapter(viewPagerAdapter);
+    }
+
+    public void setWebViewDeclaration(String url) {
+        webViewDeclaration.loadUrl("http://docs.google.com/viewer?url=" + url);
+        webViewDeclaration.setVisibility(View.VISIBLE);
     }
 }
 

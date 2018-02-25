@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ua.dnigma.edrquery.R;
+import ua.dnigma.edrquery.activity.MainActivity;
 import ua.dnigma.edrquery.adapter.EdrRecyclerAdapter;
 import ua.dnigma.edrquery.callback.OnCheckboxCallback;
 import ua.dnigma.edrquery.callback.OnEdrQueryCallback;
+import ua.dnigma.edrquery.callback.OnViewDeclarationCallback;
 import ua.dnigma.edrquery.data.DBHelper;
 import ua.dnigma.edrquery.data.DataBaseManager;
 import ua.dnigma.edrquery.manager.EdrQueryManager;
@@ -23,7 +25,7 @@ import ua.dnigma.edrquery.model.Item;
  * Created by Даниил on 29.11.2017.
  */
 
-public class EdrQueryFragment extends Fragment implements OnEdrQueryCallback, OnCheckboxCallback{
+public class EdrQueryFragment extends Fragment implements OnEdrQueryCallback, OnCheckboxCallback, OnViewDeclarationCallback {
 
     private RecyclerView recyclerView;
     private EdrRecyclerAdapter edrRecyclerAdapter;
@@ -51,7 +53,7 @@ public class EdrQueryFragment extends Fragment implements OnEdrQueryCallback, On
     public void onSucsses(EdrQuery edrQueries) {
 
         edrRecyclerAdapter = new EdrRecyclerAdapter(getContext(), edrQueries.getItems(),
-                this);
+                this, this);
         recyclerView.setAdapter(edrRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
@@ -71,6 +73,17 @@ public class EdrQueryFragment extends Fragment implements OnEdrQueryCallback, On
     public void unChecked(String id) {
         DataBaseManager.getInstance(getContext()).getEdrFavoriteTableDao()
                 .deleteNotInterestingEDRItemFromDB(id);
+
+    }
+
+    @Override
+    public void onSucssesWebviewDeclaration(String url) {
+        ((MainActivity)getActivity()).setWebViewDeclaration(url);
+
+    }
+
+    @Override
+    public void onFailureWebviewDeclaration(String noLinkPDF) {
 
     }
 }

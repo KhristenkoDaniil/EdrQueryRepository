@@ -15,6 +15,7 @@ import java.util.List;
 
 import ua.dnigma.edrquery.R;
 import ua.dnigma.edrquery.callback.OnCheckboxCallback;
+import ua.dnigma.edrquery.callback.OnViewDeclarationCallback;
 import ua.dnigma.edrquery.data.DataBaseManager;
 import ua.dnigma.edrquery.model.Item;
 
@@ -27,12 +28,15 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
     private LayoutInflater inflater;
     private List<Item> edrItems = new ArrayList<>();
     OnCheckboxCallback onCheckboxCallback;
+    OnViewDeclarationCallback onViewDeclarationCallback;
 
 
-    public EdrRecyclerAdapter(Context context, List<Item> items, OnCheckboxCallback onCheckboxCallback) {
+    public EdrRecyclerAdapter(Context context, List<Item> items, OnCheckboxCallback onCheckboxCallback,
+                              OnViewDeclarationCallback onViewDeclarationCallback) {
         this.inflater = LayoutInflater.from(context);
         this.edrItems = items;
         this.onCheckboxCallback = onCheckboxCallback;
+        this.onViewDeclarationCallback = onViewDeclarationCallback;
     }
 
     @Override
@@ -72,7 +76,7 @@ public class EdrRecyclerAdapter extends RecyclerView.Adapter<EdrRecyclerAdapter.
         holder.bookViewDeclaration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int d;
+                onViewDeclarationCallback.onSucssesWebviewDeclaration(edrItem.getLinkPDF());
 
             }
         });
