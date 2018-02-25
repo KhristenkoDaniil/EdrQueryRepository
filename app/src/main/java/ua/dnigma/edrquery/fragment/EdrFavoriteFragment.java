@@ -13,10 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.dnigma.edrquery.R;
+import ua.dnigma.edrquery.activity.MainActivity;
 import ua.dnigma.edrquery.adapter.EdrFavoriteRecyclerAdapter;
 import ua.dnigma.edrquery.adapter.EdrRecyclerAdapter;
 import ua.dnigma.edrquery.callback.OnCheckboxCallback;
 import ua.dnigma.edrquery.callback.OnEdrQueryCallback;
+import ua.dnigma.edrquery.callback.OnViewDeclarationCallback;
 import ua.dnigma.edrquery.data.DataBaseManager;
 import ua.dnigma.edrquery.manager.EdrQueryManager;
 import ua.dnigma.edrquery.model.EdrQuery;
@@ -26,7 +28,7 @@ import ua.dnigma.edrquery.model.Item;
  * Created by Даниил on 29.11.2017.
  */
 
-public class EdrFavoriteFragment extends Fragment {
+public class EdrFavoriteFragment extends Fragment implements OnCheckboxCallback, OnViewDeclarationCallback {
 
     private RecyclerView recyclerView;
     private EdrFavoriteRecyclerAdapter edrFavoriteRecyclerAdapter;
@@ -53,11 +55,30 @@ public class EdrFavoriteFragment extends Fragment {
                 .showFavoriteItems();
 
         edrFavoriteRecyclerAdapter = new EdrFavoriteRecyclerAdapter(getContext(), itemList,
-                null);
+                this, this);
         recyclerView.setAdapter(edrFavoriteRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
     }
 
 
+    @Override
+    public void onChecked(Item item) {
+
+    }
+
+    @Override
+    public void unChecked(String id) {
+
+    }
+
+    @Override
+    public void onSucssesWebviewDeclaration(String url) {
+        ((MainActivity)getActivity()).setWebViewDeclaration(url);
+    }
+
+    @Override
+    public void onFailureWebviewDeclaration(String noLinkPDF) {
+
+    }
 }

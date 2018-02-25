@@ -25,7 +25,8 @@ import ua.dnigma.edrquery.model.Item;
  * Created by Даниил on 29.11.2017.
  */
 
-public class EdrQueryFragment extends Fragment implements OnEdrQueryCallback, OnCheckboxCallback, OnViewDeclarationCallback {
+public class EdrQueryFragment extends Fragment implements OnEdrQueryCallback, OnCheckboxCallback,
+        OnViewDeclarationCallback {
 
     private RecyclerView recyclerView;
     private EdrRecyclerAdapter edrRecyclerAdapter;

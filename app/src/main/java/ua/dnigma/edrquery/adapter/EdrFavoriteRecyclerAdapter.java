@@ -16,6 +16,7 @@ import java.util.List;
 
 import ua.dnigma.edrquery.R;
 import ua.dnigma.edrquery.callback.OnCheckboxCallback;
+import ua.dnigma.edrquery.callback.OnViewDeclarationCallback;
 import ua.dnigma.edrquery.model.Item;
 
 /**
@@ -27,12 +28,15 @@ public class EdrFavoriteRecyclerAdapter extends RecyclerView.Adapter<EdrFavorite
     private LayoutInflater inflater;
     private List<Item> edrItems = new ArrayList<>();
     OnCheckboxCallback onCheckboxCallback;
+    OnViewDeclarationCallback onViewDeclarationCallback;
 
 
-    public EdrFavoriteRecyclerAdapter(Context context, List<Item> items, OnCheckboxCallback onCheckboxCallback) {
+    public EdrFavoriteRecyclerAdapter(Context context, List<Item> items, OnCheckboxCallback onCheckboxCallback,
+                                      OnViewDeclarationCallback onViewDeclarationCallback) {
         this.inflater = LayoutInflater.from(context);
         this.edrItems = items;
         this.onCheckboxCallback = onCheckboxCallback;
+        this.onViewDeclarationCallback = onViewDeclarationCallback;
     }
 
     @Override
@@ -57,23 +61,23 @@ public class EdrFavoriteRecyclerAdapter extends RecyclerView.Adapter<EdrFavorite
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked) {
                     onCheckboxCallback.onChecked(edrItem);
-                }else {
+                } else {
                     onCheckboxCallback.unChecked(edrItem.getId());
                 }
 
             }
         });
 
-       if (edrItem.getFavorite()) {
-           holder.checkBoxGoldStar.setChecked(true);
-       }else {
-           holder.checkBoxGoldStar.setChecked(false);
-       }
+        if (edrItem.getFavorite()) {
+            holder.checkBoxGoldStar.setChecked(true);
+        } else {
+            holder.checkBoxGoldStar.setChecked(false);
+        }
 
         holder.bookViewDeclaration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int d;
+                onViewDeclarationCallback.onSucssesWebviewDeclaration(edrItem.getLinkPDF());
 
             }
         });
