@@ -48,17 +48,39 @@
         android:textColor="@color/Black"
         android:text="dsjkghkakjgklakg" />
 
-    <CheckBox
-        android:id="@+id/checkbox_gold_star"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:button="@drawable/checkstar_selector"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
-    <ImageView
-        android:id="@+id/book_view_declaration"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@drawable/books_icon" />
+        <CheckBox
+            android:id="@+id/checkbox_gold_star"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:button="@drawable/checkstar_selector"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"/>
+
+        <ImageView
+            android:id="@+id/book_view_declaration"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/books_icon"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"/>
+
+        <ImageView
+            android:id="@+id/save_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/pen_icon"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"/>
+
+    </LinearLayout>
+
+
 
 
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import ua.dnigma.edrquery.adapter.EdrFavoriteRecyclerAdapter;
 import ua.dnigma.edrquery.adapter.EdrRecyclerAdapter;
 import ua.dnigma.edrquery.callback.OnCheckboxCallback;
 import ua.dnigma.edrquery.callback.OnEdrQueryCallback;
+import ua.dnigma.edrquery.callback.OnSaveCommentCallback;
 import ua.dnigma.edrquery.callback.OnViewDeclarationCallback;
 import ua.dnigma.edrquery.data.DataBaseManager;
 import ua.dnigma.edrquery.manager.EdrQueryManager;
@@ -28,7 +30,8 @@ import ua.dnigma.edrquery.model.Item;
  * Created by Даниил on 29.11.2017.
  */
 
-public class EdrFavoriteFragment extends Fragment implements OnCheckboxCallback, OnViewDeclarationCallback {
+public class EdrFavoriteFragment extends Fragment implements OnCheckboxCallback,
+        OnViewDeclarationCallback, OnSaveCommentCallback{
 
     private RecyclerView recyclerView;
     private EdrFavoriteRecyclerAdapter edrFavoriteRecyclerAdapter;
@@ -55,7 +58,7 @@ public class EdrFavoriteFragment extends Fragment implements OnCheckboxCallback,
                 .showFavoriteItems();
 
         edrFavoriteRecyclerAdapter = new EdrFavoriteRecyclerAdapter(getContext(), itemList,
-                this, this);
+                this, this, this);
         recyclerView.setAdapter(edrFavoriteRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -81,6 +84,13 @@ public class EdrFavoriteFragment extends Fragment implements OnCheckboxCallback,
 
     @Override
     public void onFailureWebviewDeclaration(String noLinkPDF) {
+
+    }
+
+    @Override
+    public void onSaveCommentToDb(String id, String comment) {
+        DataBaseManager.getInstance(getContext()).getEdrFavoriteTableDao().updateComments(id, comment);
+        Toast.makeText(getContext(),R.string.save_comment, Toast.LENGTH_LONG).show();
 
     }
 }

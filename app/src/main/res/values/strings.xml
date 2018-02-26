@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">EdrQuery</string>
+    <string name="app_name">Реестр деклараций</string>
+    <string name="save_comment">Комментарий сохранен</string>
+
 </resources>

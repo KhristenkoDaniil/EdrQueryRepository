@@ -97,6 +97,9 @@ public class EdrFavoriteTableDao {
         contentValues.put(EdrInterestSchema.COMMENTS, comment);
         sqLiteDatabase.update(EdrInterestSchema.TABLE_NAME, contentValues,
                 EdrInterestSchema.ID + "=?", new String[]{id});
+
+        sqLiteDatabase.close();
+
     }
 }
 

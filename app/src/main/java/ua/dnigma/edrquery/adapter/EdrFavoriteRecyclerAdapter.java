@@ -16,6 +16,7 @@ import java.util.List;
 
 import ua.dnigma.edrquery.R;
 import ua.dnigma.edrquery.callback.OnCheckboxCallback;
+import ua.dnigma.edrquery.callback.OnSaveCommentCallback;
 import ua.dnigma.edrquery.callback.OnViewDeclarationCallback;
 import ua.dnigma.edrquery.model.Item;
 
@@ -29,14 +30,17 @@ public class EdrFavoriteRecyclerAdapter extends RecyclerView.Adapter<EdrFavorite
     private List<Item> edrItems = new ArrayList<>();
     OnCheckboxCallback onCheckboxCallback;
     OnViewDeclarationCallback onViewDeclarationCallback;
+    OnSaveCommentCallback onSaveCommentCallback;
 
 
     public EdrFavoriteRecyclerAdapter(Context context, List<Item> items, OnCheckboxCallback onCheckboxCallback,
-                                      OnViewDeclarationCallback onViewDeclarationCallback) {
+                                      OnViewDeclarationCallback onViewDeclarationCallback,
+                                      OnSaveCommentCallback onSaveCommentCallback) {
         this.inflater = LayoutInflater.from(context);
         this.edrItems = items;
         this.onCheckboxCallback = onCheckboxCallback;
         this.onViewDeclarationCallback = onViewDeclarationCallback;
+        this.onSaveCommentCallback = onSaveCommentCallback;
     }
 
     @Override
@@ -80,6 +84,14 @@ public class EdrFavoriteRecyclerAdapter extends RecyclerView.Adapter<EdrFavorite
             }
         });
 
+        holder.saveComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String comment = holder.comment.getText().toString();
+                onSaveCommentCallback.onSaveCommentToDb(edrItem.getId(),comment);
+            }
+        });
+
 
     }
 
@@ -97,6 +109,7 @@ public class EdrFavoriteRecyclerAdapter extends RecyclerView.Adapter<EdrFavorite
         private EditText comment;
         private CheckBox checkBoxGoldStar;
         private ImageView bookViewDeclaration;
+        private ImageView saveComment;
 
 
         public EdrHolder(View itemView) {
@@ -108,6 +121,7 @@ public class EdrFavoriteRecyclerAdapter extends RecyclerView.Adapter<EdrFavorite
             position = itemView.findViewById(R.id.position);
             checkBoxGoldStar = itemView.findViewById(R.id.checkbox_gold_star);
             bookViewDeclaration = itemView.findViewById(R.id.book_view_declaration);
+            saveComment = itemView.findViewById(R.id.save_comment);
         }
     }
 }
