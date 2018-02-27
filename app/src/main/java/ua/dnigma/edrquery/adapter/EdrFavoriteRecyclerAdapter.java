@@ -33,7 +33,8 @@ public class EdrFavoriteRecyclerAdapter extends RecyclerView.Adapter<EdrFavorite
     OnSaveCommentCallback onSaveCommentCallback;
 
 
-    public EdrFavoriteRecyclerAdapter(Context context, List<Item> items, OnCheckboxCallback onCheckboxCallback,
+    public EdrFavoriteRecyclerAdapter(Context context, List<Item> items,
+                                      OnCheckboxCallback onCheckboxCallback,
                                       OnViewDeclarationCallback onViewDeclarationCallback,
                                       OnSaveCommentCallback onSaveCommentCallback) {
         this.inflater = LayoutInflater.from(context);

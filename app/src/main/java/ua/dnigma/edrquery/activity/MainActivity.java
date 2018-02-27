@@ -1,26 +1,25 @@
 package ua.dnigma.edrquery.activity;
 
 import android.app.SearchManager;
+import android.content.Context;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.CheckBox;
 import android.widget.SearchView;
 
 import ua.dnigma.edrquery.R;
 import ua.dnigma.edrquery.adapter.ViewPagerAdapter;
+import ua.dnigma.edrquery.callback.OnEdrQueryCallback;
 import ua.dnigma.edrquery.fragment.EdrFavoriteFragment;
 import ua.dnigma.edrquery.fragment.EdrQueryFragment;
+import ua.dnigma.edrquery.manager.EdrQueryManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private WebView webViewDeclaration;
+    Context context = MainActivity.this;
 
 
     @Override
@@ -83,16 +83,14 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+
+                new EdrQueryManager(context).getDeclarationAsync((OnEdrQueryCallback) context, s);
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                if (viewPager.getCurrentItem() == 0) {
-
-                } else {
-
-                }
 
                 return false;
             }
@@ -124,5 +122,6 @@ public class MainActivity extends AppCompatActivity {
         webViewDeclaration.loadUrl("http://docs.google.com/viewer?url=" + url);
         webViewDeclaration.setVisibility(View.VISIBLE);
     }
+
 }
 

@@ -9,10 +9,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import ua.dnigma.edrquery.activity.MainActivity;
 import ua.dnigma.edrquery.api.EdrApi;
 import ua.dnigma.edrquery.callback.OnEdrQueryCallback;
 import ua.dnigma.edrquery.data.DataBaseManager;
-import ua.dnigma.edrquery.data.EdrFavoriteTableDao;
 import ua.dnigma.edrquery.model.EdrQuery;
 import ua.dnigma.edrquery.model.Item;
 import ua.dnigma.edrquery.retrofit.RetrofitEdr;
@@ -26,6 +26,7 @@ public class EdrQueryManager {
     private Context context;
     private Retrofit retrofit;
 
+
     public EdrQueryManager(Context context) {
         this.context = context;
         this.retrofit = RetrofitEdr.getInstance().getRetrofit();
@@ -34,11 +35,11 @@ public class EdrQueryManager {
         RetrofitEdr.getInstance().initConnectivityManager(context);
     }
 
-    public void getDeclarationAsync(final OnEdrQueryCallback onEdrQueryCallback) {
+    public void getDeclarationAsync(final OnEdrQueryCallback onEdrQueryCallback, String searchName) {
 
         EdrApi edrApi = retrofit.create(EdrApi.class);
 
-        Call<EdrQuery> call = edrApi.getEdrDeclaration("петр");
+        Call<EdrQuery> call = edrApi.getEdrDeclaration(searchName);
 
         call.enqueue(new Callback<EdrQuery>() {
             @Override
@@ -72,4 +73,6 @@ public class EdrQueryManager {
         edrQuery.setItems(items);
         return edrQuery;
     }
+
+
 }

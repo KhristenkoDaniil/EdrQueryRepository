@@ -47,7 +47,7 @@ public class EdrQueryFragment extends Fragment implements OnEdrQueryCallback, On
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        new EdrQueryManager(getContext()).getDeclarationAsync(this);
+//        new EdrQueryManager(getContext()).getDeclarationAsync(this);
     }
 
     @Override
