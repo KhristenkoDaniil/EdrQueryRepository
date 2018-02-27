@@ -3,6 +3,7 @@ package ua.dnigma.edrquery.activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.Adapter;
 import android.widget.SearchView;
 
 import ua.dnigma.edrquery.R;
@@ -20,6 +22,7 @@ import ua.dnigma.edrquery.callback.OnEdrQueryCallback;
 import ua.dnigma.edrquery.fragment.EdrFavoriteFragment;
 import ua.dnigma.edrquery.fragment.EdrQueryFragment;
 import ua.dnigma.edrquery.manager.EdrQueryManager;
+import ua.dnigma.edrquery.model.EdrQuery;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -84,7 +87,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String s) {
 
-                new EdrQueryManager(context).getDeclarationAsync((OnEdrQueryCallback) context, s);
+                new EdrQueryManager(context).getDeclarationAsync(new OnEdrQueryCallback() {
+                    @Override
+                    public void onSucsses(EdrQuery edrQuery) {
+                        ((EdrQueryFragment)((ViewPagerAdapter)viewPager.getAdapter()).getItem(0)).onSucsses(edrQuery);
+
+                    }
+
+                    @Override
+                    public void onFailure(String error) {
+
+                    }
+                }, s);
 
                 return false;
             }
