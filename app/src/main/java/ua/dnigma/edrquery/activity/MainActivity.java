@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 new EdrQueryManager(context).getDeclarationAsync(new OnEdrQueryCallback() {
                     @Override
                     public void onSucsses(EdrQuery edrQuery) {
-                        ((EdrQueryFragment)((ViewPagerAdapter)viewPager.getAdapter()).getItem(0)).onSucsses(edrQuery);
+                        ((EdrQueryFragment) ((ViewPagerAdapter) viewPager.getAdapter()).getItem(0)).onSucsses(edrQuery);
 
                     }
 
@@ -118,10 +118,8 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
