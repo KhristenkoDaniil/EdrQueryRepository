@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Реестр деклараций</string>
     <string name="save_comment">Комментарий сохранен</string>
+    <string name="search">Введите имя для поиска</string>
 
 </resources>

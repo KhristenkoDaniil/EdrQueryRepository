@@ -15,6 +15,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Adapter;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import ua.dnigma.edrquery.R;
 import ua.dnigma.edrquery.adapter.ViewPagerAdapter;
@@ -59,10 +60,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 0) {
+                if (position == 1) {
                     viewPager.getAdapter().notifyDataSetChanged();
-                } else {
-                    viewPager.getAdapter().notifyDataSetChanged();
+                } if (position == 0) {
+                    Toast.makeText(context, R.string.search, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -76,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(context, R.string.search, Toast.LENGTH_SHORT).show();
     }
 
     @Override
